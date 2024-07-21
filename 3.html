@@ -1,0 +1,76 @@
+<head>
+    <style>
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: black;
+            margin-top: 1rem;
+            padding: 0.25rem 0.8rem;
+        }
+        a:nth-of-type(2) {
+            color: black;
+            background-color: #ff17dd;
+        }
+        .interval {
+            color: black;
+            width: 80vw;
+            margin-top: 20px;
+            word-spacing: 5px;
+            font-family: serif;
+        }
+        .recursion {
+            color: #ff17dd;
+            width: 80vw;
+            margin-top: 20px;
+            word-spacing: 5px;
+            font-family: serif;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" id="interval">using interval</a>
+    <a href="#" id="recursion">using recursion</a>
+    <div class="interval"></div>
+    <div class="recursion"></div>
+
+    <script>
+        let intervalCounter = 0;
+        let recursiveCounter = 0;
+        let intervalHTML = "";
+        let recursiveHTML = "";
+        let interval;
+        let recursion;
+
+        document.getElementById("interval").addEventListener("click", evt => {
+            evt.preventDefault();
+            intervalCounter++;
+            if (intervalCounter == 1) {
+                interval = setInterval(() => {
+                    intervalHTML += "Writing Text Using setInterval. ";
+                    document.querySelector(".interval").innerText =
+                        intervalHTML;
+                }, 1500);
+            } else {
+                clearInterval(interval);
+            }
+        });
+        document.getElementById("recursion").addEventListener("click", evt => {
+            evt.preventDefault();
+            recursiveCounter++;
+            function addTextWithRecursion() {
+                if (recursiveCounter == 1) {
+                    recursion = setTimeout(() => {
+                        recursiveHTML += "Writing Text Using Recursion. ";
+                        document.querySelector(".recursion").innerText =
+                            recursiveHTML;
+                                        addTextWithRecursion();
+
+                    }, 1500);
+                } else {
+                    clearTimeout(recursion);
+                }
+            }
+            addTextWithRecursion();
+        });
+    </script>
+</body>
